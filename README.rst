@@ -8,6 +8,8 @@ FI Widgets are generated from the `FI Python module <https://github.com/bbuseniu
 **Android**:
 
 .. image:: https://github.com/bbusenius/FI-Widgets-App/raw/master/docs/fi-widgets-android.jpeg
+    :height: 889
+    :width: 400
 
 **Ubuntu**:
 
