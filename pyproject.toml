@@ -28,7 +28,7 @@ requires = [
 test_requires = [
     "pytest",
 ]
-splash_background_color = "#3f9ebd"
+splash_background_color = "#ffffff"
 
 [tool.briefcase.app.fi-widgets.macOS]
 universal_build = true
