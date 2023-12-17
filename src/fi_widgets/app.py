@@ -36,7 +36,7 @@ class FIWidgets(toga.App):
     def get_refresh_button(self):
         """Create and display a refresh button in the main window."""
         label = toga.Label(
-            text="No Internet\n:-(",
+            text="Connection\nProblem\n:-(",
             style=Pack(
                 text_align=CENTER,
                 color=self.font_color,
