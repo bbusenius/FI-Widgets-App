@@ -5,6 +5,11 @@ The FI Widgets App is a multi-platform application that provides math widgets fo
 
 FI Widgets are generated from the `FI Python module <https://github.com/bbusenius/FI>`_ and added to the website using `FI API <https://github.com/bbusenius/FI-API>`_. As new functions are added to the FI Python module, new widgets are automatically added to the FI Website and thus this app.
 
+Installation
+------------
+
+Installers for Android and Ubuntu and be `downloaded from the releases page here <https://github.com/bbusenius/FI-Widgets-App/releases/latest>`_.
+
 **Android**:
 
 .. image:: https://github.com/bbusenius/FI-Widgets-App/raw/master/docs/fi-widgets-android.jpeg
