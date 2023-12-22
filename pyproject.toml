@@ -11,7 +11,7 @@ author_email = "bbusenius@gmail.com"
 [tool.briefcase.app.fi-widgets]
 formal_name = "FI Widgets"
 description = "Math widgets for the Financial Independence community."
-long_description = """FI Widgets is an API driven website for the Financial Independence (FIRE) commmunity. The website automatically builds itself from FI API which automatically builds itself from the Python FI module. New widgets are generated as functions are added to the FI module.
+long_description = """FI Widgets is an API driven website for the Financial Independence (FIRE) community. The website automatically builds itself from FI API which automatically builds itself from the Python FI module. New widgets are generated as functions are added to the FI module.
 """
 icon = "src/fi_widgets/resources/fi_widgets/icon"
 splash = "src/fi_widgets/resources/fi_widgets/icon"
