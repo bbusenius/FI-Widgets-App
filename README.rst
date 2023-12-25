@@ -8,7 +8,7 @@ FI Widgets are generated from the `FI Python module <https://github.com/bbuseniu
 Installation
 ------------
 
-Installers for Android and Ubuntu and be `downloaded from the releases page here <https://github.com/bbusenius/FI-Widgets-App/releases/latest>`_.
+The Android app is best `downloaded and installed from the Amazon app store <https://www.amazon.com/gp/product/B0CQTX73ZB>`_. Installers for Android and Ubuntu can also be `downloaded from the releases page here <https://github.com/bbusenius/FI-Widgets-App/releases/latest>`_.
 
 **Android**:
 
