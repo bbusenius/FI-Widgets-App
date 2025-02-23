@@ -4,7 +4,7 @@ project_name = "FI Widgets"
 bundle = "com.digitalartbb"
 version = "0.0.1"
 url = "https://fi-widgets.com/"
-license = "MIT license"
+license.file = "LICENSE"
 author = "Bradley Busenius"
 author_email = "bbusenius@gmail.com"
 
@@ -33,13 +33,13 @@ splash_background_color = "#ffffff"
 [tool.briefcase.app.fi-widgets.macOS]
 universal_build = true
 requires = [
-    "toga-cocoa~=0.4.0",
-    "std-nslog~=1.0.0"
+    "toga-cocoa~=0.4.9",
+    "std-nslog~=1.0.3",
 ]
 
 [tool.briefcase.app.fi-widgets.linux]
 requires = [
-    "toga-gtk~=0.4.0",
+    "toga-gtk~=0.4.9",
 ]
 
 [tool.briefcase.app.fi-widgets.linux.system.debian]
@@ -57,7 +57,8 @@ system_runtime_requires = [
     # Dependencies that GTK looks for at runtime
     "libcanberra-gtk3-module",
     # Needed to provide WebKit2 at runtime
-    # "gir1.2-webkit2-4.0",
+    # Note: Debian 11 and Ubuntu 20.04 require gir1.2-webkit2-4.0 instead
+    # "gir1.2-webkit2-4.1",
 ]
 
 [tool.briefcase.app.fi-widgets.linux.system.rhel]
@@ -93,7 +94,7 @@ system_runtime_requires = [
     # Needed to support Python bindings to GTK
     "gobject-introspection", "typelib(Gtk)=3.0",
     # Dependencies that GTK looks for at runtime
-    "libcanberra-gtk3-0",
+    "libcanberra-gtk3-module",
     # Needed to provide WebKit2 at runtime
     # "libwebkit2gtk3",
     # "typelib(WebKit2)",
@@ -148,29 +149,37 @@ linuxdeploy_plugins = [
 
 [tool.briefcase.app.fi-widgets.linux.flatpak]
 flatpak_runtime = "org.gnome.Platform"
-flatpak_runtime_version = "44"
+flatpak_runtime_version = "47"
 flatpak_sdk = "org.gnome.Sdk"
 
 [tool.briefcase.app.fi-widgets.windows]
 requires = [
-    "toga-winforms~=0.4.0",
+    "toga-winforms~=0.4.9",
 ]
 
 # Mobile deployments
 [tool.briefcase.app.fi-widgets.iOS]
 requires = [
-    "toga-iOS~=0.4.0",
-    "std-nslog~=1.0.0"
+    "toga-iOS~=0.4.9",
+    "std-nslog~=1.0.3",
 ]
 
 [tool.briefcase.app.fi-widgets.android]
-# Temporary until Briefcase is updated
-template = "../briefcase-android-gradle-template"
 primary_color = "#2b6b80"
 primary_color_dark = "#183d48"
 accent_color = "#d81b60"
 requires = [
-    "toga-android~=0.4.0"
+    "toga-android~=0.4.9",
+]
+
+base_theme = "Theme.MaterialComponents.Light.DarkActionBar"
+
+build_gradle_dependencies = [
+    "com.google.android.material:material:1.12.0",
+    # Needed for DetailedList
+    # "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0",
+    # Needed for MapView
+    # "org.osmdroid:osmdroid-android:6.1.20",
 ]
 icon = "src/fi_widgets/resources/fi_widgets/icon"
 splash = "src/fi_widgets/resources/fi_widgets/icon"
@@ -178,6 +187,6 @@ splash = "src/fi_widgets/resources/fi_widgets/icon"
 # Web deployments
 [tool.briefcase.app.fi-widgets.web]
 requires = [
-    "toga-web~=0.4.0",
+    "toga-web~=0.4.9",
 ]
 style_framework = "Shoelace v2.3"

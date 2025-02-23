@@ -1,6 +1,7 @@
 """
 A wrapper for the FI Widgets website.
 """
+
 import urllib.request
 
 import toga
@@ -114,4 +115,4 @@ class FIWidgets(toga.App):
 
 
 def main():
-    return FIWidgets()
+    return FIWidgets("FI Widgets", "com.digitalartbb")

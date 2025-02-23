@@ -3,6 +3,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 import toga
+from toga import Window
 
 from fi_widgets.app import FIWidgets
 
@@ -14,7 +15,7 @@ def app():
 
 # Test load_webview()
 def test_load_webview_displays_main_window(app):
-    app.main_window = MagicMock()
+    app.main_window = MagicMock(spec=Window)
     app.webview = MagicMock()
     app.load_webview()
     app.main_window.content == app.webview
@@ -67,7 +68,7 @@ def test_refresh_page_not_connected(app):
 
 # Test get_refresh_button()
 def test_get_refresh_button_displays_correct_elements(app):
-    app.main_window = MagicMock()
+    app.main_window = MagicMock(spec=Window)
     app.get_refresh_button()
     main_window_content = app.main_window.content
 
@@ -82,19 +83,25 @@ def test_get_refresh_button_displays_correct_elements(app):
 # Test startup()
 def test_startup_connected_on_non_android_platform(app, monkeypatch):
     app.connected = MagicMock(return_value=True)
-    toga.MainWindow = MagicMock()
-    toga.WebView = MagicMock()
-    app.main_window = MagicMock()
-    app.main_window.show = MagicMock()
+    mock_main_window = MagicMock()
+    mock_main_window.__class__ = toga.Window
+    mock_main_window.closable = True
+    original_main_window = toga.MainWindow
+    toga.MainWindow = MagicMock(return_value=mock_main_window)
+    mock_webview = MagicMock()
+    original_webview = toga.WebView
+    toga.WebView = MagicMock(return_value=mock_webview)
     monkeypatch.setattr(toga.platform, 'current_platform', 'some_non_android_platform')
     app.startup()
     toga.MainWindow.assert_called_once_with(title=app.formal_name)
     toga.WebView.assert_called_once()
-    assert toga.WebView.return_value.url == app.url
-    assert len(app.app.commands) == 1
+    assert mock_webview.url == app.url
+    assert len(app.commands) == 1
     app.connected.assert_called_once()
-    assert app.main_window.content == toga.WebView.return_value
-    app.main_window.show.assert_called_once()
+    assert mock_main_window.content == mock_webview
+    mock_main_window.show.assert_called_once()
+    toga.MainWindow = original_main_window
+    toga.WebView = original_webview
 
 
 def test_startup_not_connected_on_non_android_platform(app, monkeypatch):
@@ -108,8 +115,24 @@ def test_startup_not_connected_on_non_android_platform(app, monkeypatch):
 
 def test_startup_on_android_should_not_have_full_screen_command(app, monkeypatch):
     app.connected = MagicMock(return_value=True)
+
+    mock_main_window = MagicMock()
+    mock_main_window.__class__ = toga.Window
+    mock_main_window.closable = True
+
+    original_main_window = toga.MainWindow
+    toga.MainWindow = MagicMock(return_value=mock_main_window)
+
+    mock_webview = MagicMock()
+    original_webview = toga.WebView
+    toga.WebView = MagicMock(return_value=mock_webview)
     monkeypatch.setattr(toga.platform, 'current_platform', 'android')
+
     app.startup()
-    assert len(app.app.commands) == 0
+
+    assert len(app.commands) == 0
     app.connected.assert_called_once()
-    assert app.main_window.content == toga.WebView.return_value
+    assert app.main_window.content == mock_webview
+
+    toga.MainWindow = original_main_window
+    toga.WebView = original_webview
